@@ -1,13 +1,34 @@
 import datetime
 
 from django.utils import timezone
-from telegram import ParseMode, Update
+from telegram import ParseMode, Update, ForceReply
 from telegram.ext import CallbackContext
 
 from tgbot.handlers.onboarding import static_text
 from tgbot.handlers.utils.info import extract_user_data_from_update
 from tgbot.models import User
 from tgbot.handlers.onboarding.keyboards import make_keyboard_for_start_command
+
+
+
+def start(update: Update, context: CallbackContext) -> None:
+    """Send a message when the command /start is issued."""
+    user = update.effective_user
+    update.message.reply_markdown_v2(
+        fr'Hi {user.mention_markdown_v2()}\!\nMa\'lumot qidirish uchun quyida qidirayotgan narsangizni yozing!',
+        reply_markup=ForceReply(selective=True),
+    )
+
+
+def help_command(update: Update, context: CallbackContext) -> None:
+    """Send a message when the command /help is issued."""
+    update.message.reply_text('Help!')
+
+
+def echo(update: Update, context: CallbackContext) -> None:
+    """Echo the user message."""
+    update.message.reply_text(update.message.text)
+
 
 
 def command_start(update: Update, context: CallbackContext) -> None:

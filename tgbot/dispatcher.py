@@ -30,8 +30,18 @@ def setup_dispatcher(dp):
     """
     Adding handlers for events from Telegram
     """
+    
+    
+     # on different commands - answer in Telegram
+    dp.add_handler(CommandHandler("start", onboarding_handlers.start))
+    dp.add_handler(CommandHandler("help", onboarding_handlers.help_command))
+
+    # on non command i.e message - echo the message on Telegram
+    dp.add_handler(MessageHandler(Filters.text & ~Filters.command, onboarding_handlers.echo))
+    
+    
+    
     # onboarding
-    dp.add_handler(CommandHandler("start", onboarding_handlers.command_start))
 
     # admin commands
     dp.add_handler(CommandHandler("admin", admin_handlers.admin))
