@@ -91,7 +91,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'dtb.wsgi.application'
-ASGI_APPLICATION = 'dtb.asgi.application'
+# ASGI_APPLICATION = 'dtb.asgi.application'
 
 
 # Database
